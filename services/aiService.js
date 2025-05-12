@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // Исправлен URL API и добавлена проверка токена
-const API_URL = "https://api-inference.huggingface.co/models/Mykesmedicus"; // Проверьте правильность URL модели
+const API_URL = "https://api-inference.huggingface.co/models/Mykesmedicus";
 
 /**
  * Анализирует симптомы и возвращает предполагаемый диагноз используя Hugging Face API
