@@ -93,8 +93,16 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // Swagger UI
-app.use("/api-docs", swaggerUi.serve);
-app.get("/api-docs", swaggerUi.setup(specs, swaggerUiOptions));
+// Custom swagger page
+app.get("/api-docs", (req, res) => {
+  res.sendFile(path.join(__dirname, "public/swagger.html"));
+});
+
+// JSON spec endpoint
+app.get("/api-docs.json", (req, res) => {
+  res.setHeader("Content-Type", "application/json");
+  res.send(specs);
+});
 
 // Database connection
 mongoose
