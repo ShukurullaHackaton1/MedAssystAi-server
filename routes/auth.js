@@ -9,10 +9,12 @@ import { auth } from "../middleware/auth.js";
 
 const router = express.Router();
 
-// Маршруты для авторизации
 router.post("/register", register);
+
 router.post("/login", login);
+
 router.get("/profile", auth, getProfile);
-router.post("/create-admin", createAdmin); // Только для разработки
+
+router.post("/create-admin", createAdmin);
 
 export default router;
