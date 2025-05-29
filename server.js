@@ -5,6 +5,9 @@ import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
 
+// Swagger imports
+import { specs, swaggerUi } from "./config/swagger.js";
+
 // Routes
 import authRoutes from "./routes/auth.js";
 import chatRoutes from "./routes/chat.js";
@@ -25,6 +28,32 @@ app.use(
   })
 );
 app.use(express.json());
+
+// Swagger UI
+app.use(
+  "/api-docs",
+  swaggerUi.serve,
+  swaggerUi.setup(specs, {
+    explorer: true,
+    customCss: `
+    .swagger-ui .topbar { display: none }
+    .swagger-ui .info { margin: 50px 0 }
+    .swagger-ui .info .title { color: #2d5aa0 }
+  `,
+    customSiteTitle: "MedAssystAI API Documentation",
+    customfavIcon: "/favicon.ico",
+    swaggerOptions: {
+      persistAuthorization: true,
+      displayRequestDuration: true,
+    },
+  })
+);
+
+// API Documentation JSON
+app.get("/api-docs.json", (req, res) => {
+  res.setHeader("Content-Type", "application/json");
+  res.send(specs);
+});
 
 // Database connection
 mongoose
@@ -49,4 +78,5 @@ if (process.env.NODE_ENV === "production") {
 // Start server
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
+  console.log(`API Documentation: http://localhost:${PORT}/api-docs`);
 });
