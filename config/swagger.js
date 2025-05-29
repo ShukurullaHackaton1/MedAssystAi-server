@@ -12,10 +12,6 @@ const options = {
         name: "MedAssystAI Support",
         email: "support@medassystai.com",
       },
-      license: {
-        name: "MIT",
-        url: "https://opensource.org/licenses/MIT",
-      },
     },
     servers: [
       {
@@ -23,7 +19,7 @@ const options = {
         description: "Development server",
       },
       {
-        url: "med-assyst-ai-server.vercel.app",
+        url: "https://your-vercel-app.vercel.app",
         description: "Production server",
       },
     ],
@@ -33,7 +29,6 @@ const options = {
           type: "http",
           scheme: "bearer",
           bearerFormat: "JWT",
-          description: "JWT Authorization header using the Bearer scheme",
         },
       },
       schemas: {
@@ -190,5 +185,22 @@ const options = {
 };
 
 const specs = swaggerJsdoc(options);
-
-export { specs, swaggerUi };
+const swaggerOptions = {
+  explorer: true,
+  customCss: `
+      .swagger-ui .topbar { display: none }
+      .swagger-ui .info { margin: 50px 0 }
+      .swagger-ui .info .title { color: #2d5aa0 }
+    `,
+  customSiteTitle: "MedAssystAI API Documentation",
+  swaggerOptions: {
+    persistAuthorization: true,
+    displayRequestDuration: true,
+  },
+  customJs: [
+    "https://unpkg.com/swagger-ui-dist@4.15.5/swagger-ui-bundle.js",
+    "https://unpkg.com/swagger-ui-dist@4.15.5/swagger-ui-standalone-preset.js",
+  ],
+  customCssUrl: ["https://unpkg.com/swagger-ui-dist@4.15.5/swagger-ui.css"],
+};
+export { specs, swaggerOptions };

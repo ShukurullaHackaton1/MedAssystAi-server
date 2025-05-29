@@ -9,7 +9,10 @@
   "routes": [
     {
       "src": "/api-docs(.*)",
-      "dest": "server.js"
+      "dest": "server.js",
+      "headers": {
+        "cache-control": "s-maxage=0"
+      }
     },
     {
       "src": "/api/(.*)",
@@ -20,7 +23,9 @@
       "dest": "server.js"
     }
   ],
-  "env": {
-    "NODE_ENV": "production"
+  "functions": {
+    "server.js": {
+      "maxDuration": 30
+    }
   }
 }
