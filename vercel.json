@@ -8,11 +8,16 @@
   ],
   "routes": [
     {
-      "src": "/api-docs(.*)",
-      "dest": "server.js",
-      "headers": {
-        "cache-control": "s-maxage=0"
-      }
+      "src": "/api-docs",
+      "dest": "server.js"
+    },
+    {
+      "src": "/api-docs.json",
+      "dest": "server.js"
+    },
+    {
+      "src": "/health",
+      "dest": "server.js"
     },
     {
       "src": "/api/(.*)",
@@ -22,5 +27,10 @@
       "src": "/(.*)",
       "dest": "server.js"
     }
-  ]
+  ],
+  "functions": {
+    "server.js": {
+      "maxDuration": 30
+    }
+  }
 }
