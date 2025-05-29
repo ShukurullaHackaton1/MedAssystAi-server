@@ -19,7 +19,7 @@ const options = {
         description: "Development server",
       },
       {
-        url: "https://your-vercel-app.vercel.app",
+        url: "med-assyst-ai-server.vercel.app",
         description: "Production server",
       },
     ],
